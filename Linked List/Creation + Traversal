@@ -8,7 +8,6 @@ struct Node{
 };
 
 void Traversal (struct Node* ptr){
-    printf("Traversal of the linked list: \n");
     while(ptr!=NULL)
     {   
         printf("%d\n", ptr->data);
@@ -38,6 +37,8 @@ int main()
     third->data=15;
     third->next=NULL;
     
+    printf("Traversal of the linked list: \n");
     Traversal(head);
     return 0;
 }
+
