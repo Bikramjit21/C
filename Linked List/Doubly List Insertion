@@ -1,0 +1,79 @@
+// Doubly linked list Insertion at beginning and end
+#include <stdio.h>
+#include <stdlib.h>
+
+struct Node{
+    int data;
+    struct Node * next;
+};
+
+void Traversal (struct Node* head){
+    struct Node * ptr = head;
+    do{
+        printf("%d\n", ptr->data);
+        ptr = ptr->next; 
+    }while(ptr!=head);
+}
+
+struct Node * insertfirst(struct Node * head, int data){
+    struct Node * ptr = (struct Node *)malloc(sizeof(struct Node));
+    ptr->data = data;
+    struct Node * p = head->next;
+    while(p->next!=head){
+        p = p->next;
+    }
+    // At this point p points to the last node of this circular linked list
+    p->next = ptr;
+    ptr->next = head;
+    head=ptr;
+    return head;
+}
+
+struct Node * insertend(struct Node * head, int data){
+    struct Node * ptr = (struct Node *)malloc(sizeof(struct Node));
+    ptr->data = data;
+    struct Node * p = head;
+    while(p->next!=head){
+        p = p->next;
+    }
+    // At this point p points to the last node of this circular linked list
+    p->next = ptr;
+    ptr->next = head;
+    return head;
+}
+
+int main()
+{
+    struct Node * head;
+    struct Node * second;
+    struct Node * third;
+    
+    // Allocate memory for nodes in the linked list in Heap
+    head = (struct Node *) malloc(sizeof(struct Node));
+    second = (struct Node *) malloc(sizeof(struct Node));
+    third = (struct Node *) malloc(sizeof(struct Node));
+    
+    // Link first and second nodes
+    head->data=7;
+    head->next=second;
+    
+    // Link second and third nodes
+    second->data=11;
+    second->next=third;
+    
+    // Terminate the list at the third node
+    third->data=15;
+    third->next=head;
+    
+    printf("Traversal of the linked list: \n");
+    Traversal(head);
+    printf("\n");
+    printf("Insertion at the beginning: \n");
+    head = insertfirst(head,80);
+    Traversal(head);
+    printf("\n");
+    printf("Insertion at the end: \n");
+    head = insertend(head,20);
+    Traversal(head);
+    return 0;
+}
